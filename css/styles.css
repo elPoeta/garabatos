@@ -14,3 +14,11 @@ h1{
   border: 1px #444 solid;
   touch-action: none; 
 }
+
+.pencil{
+  cursor: url('../img/pencil.ico'), crosshair;
+}
+
+.eraser {
+  cursor: url('../img/eraser.ico'), cell;
+}
