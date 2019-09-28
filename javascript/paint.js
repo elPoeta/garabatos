@@ -11,6 +11,10 @@ class Paint {
     this.canvas.addEventListener("mouseup", this.handlerMouseUp.bind(this));
     this.canvas.addEventListener("mousemove", this.handlerMouseMove.bind(this));
     this.canvas.addEventListener("mousemove", this.draw.bind(this));
+    this.canvas.addEventListener("touchstart", this.handlerTouchStart.bind(this));
+    this.canvas.addEventListener("touchend", this.handlerTouchEnd.bind(this));
+    this.canvas.addEventListener("touchmove", this.handlerTouchMove.bind(this));
+    this.canvas.addEventListener("touchmove", this.draw.bind(this));
   }
 
   init(width, height) {
@@ -40,8 +44,44 @@ class Paint {
     };
   }
 
+  handlerTouchStart(e) {
+    e.preventDefault();
+    this.mousePosition = this.getTouchPosition(e);
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent("mousedown", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    this.canvas.dispatchEvent(mouseEvent);
+  }
+
+  handlerTouchEnd(e) {
+    e.preventDefault();
+    const mouseEvent = new MouseEvent("mouseup", {});
+    this.canvas.dispatchEvent(mouseEvent);
+  }
+
+  handlerTouchMove(e) {
+    e.preventDefault();
+    const touch = e.touches[0];
+    const mouseEvent = new MouseEvent("mousemove", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    this.canvas.dispatchEvent(mouseEvent);
+  }
+
+  getTouchPosition(e) {
+    const clientRect = this.canvas.getBoundingClientRect();
+    return {
+      x: e.touches[0].clientX - clientRect.left,
+      y: e.touches[0].clientY - clientRect.top
+    };
+  }
+
   draw() {
     if (this.drawing) {
+
       this.ctx.moveTo(this.lastPosition.x, this.lastPosition.y);
       this.ctx.lineTo(this.mousePosition.x, this.mousePosition.y);
       this.ctx.stroke();
@@ -50,4 +90,4 @@ class Paint {
   }
 }
 
-new Paint('canvas').init(720, 400);
+new Paint('canvas').init(window.innerWidth - 20, window.innerHeight - 350);
