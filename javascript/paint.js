@@ -4,6 +4,7 @@ class Paint {
     this.btnDraw = document.querySelector('#btnDraw');
     this.btnErase = document.querySelector('#btnErase');
     this.lineWidth = document.querySelector('#lineWidth');
+    this.lineCap = document.querySelector('#lineCap');
     this.chooseColor = document.querySelector('#lineColor');
     this.btnClear = document.querySelector('#clearCanvas');
     this.xPos = document.querySelector('#xPos');
@@ -29,6 +30,7 @@ class Paint {
     this.btnErase.addEventListener('click', this.handlerToogleTool.bind(this));
     this.chooseColor.addEventListener('change', this.hanlderChangeColor.bind(this));
     this.lineWidth.addEventListener('change', this.handlerLineWidth.bind(this));
+    this.lineCap.addEventListener('change', this.handlerLineCap.bind(this));
     this.btnClear.addEventListener('click', this.handlerClearCanvas.bind(this));
   }
 
@@ -103,7 +105,7 @@ class Paint {
 
       this.ctx.moveTo(this.position.last.x, this.position.last.y);
       this.ctx.lineTo(this.position.current.x, this.position.current.y);
-      this.ctx.lineJoin = this.ctx.lineCap = 'round';
+      this.ctx.lineJoin = this.ctx.lineCap;
       this.ctx.stroke();
     }
     this.position.last = this.position.current;
@@ -111,6 +113,10 @@ class Paint {
 
   handlerLineWidth(e) {
     this.ctx.lineWidth = e.target.value;
+  }
+
+  handlerLineCap(e) {
+    this.ctx.lineCap = e.target.value;
   }
 
   handlerToogleTool(e) {
