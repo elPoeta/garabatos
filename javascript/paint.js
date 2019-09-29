@@ -4,11 +4,12 @@ class Paint {
     this.btnDraw = document.querySelector('#btnDraw');
     this.btnErase = document.querySelector('#btnErase');
     this.chooseColor = document.querySelector('#lineColor');
+    this.btnClear = document.querySelector('#clearCanvas');
     this.ctx = this.canvas.getContext('2d');
     this.ctx.strokeStyle = "#222222";
     this.ctx.lineWith = 2;
     this.drawing = false;
-    this.toolType = 'draw';
+    this.toolType = 'pencil';
     this.mousePosition = { x: 0, y: 0 };
     this.lastPosition = this.mousePosition;
     this.canvas.addEventListener("mousedown", this.handlerMouseDown.bind(this));
@@ -22,6 +23,7 @@ class Paint {
     this.btnDraw.addEventListener('click', this.handlerToogleTool.bind(this));
     this.btnErase.addEventListener('click', this.handlerToogleTool.bind(this));
     this.chooseColor.addEventListener('change', this.hanlderChangeColor.bind(this));
+    this.btnClear.addEventListener('click', this.handlerClearCanvas.bind(this));
   }
 
   init(width, height) {
@@ -89,7 +91,7 @@ class Paint {
   draw() {
     if (this.drawing) {
       this.ctx.beginPath();
-      if (this.toolType === 'draw') {
+      if (this.toolType === 'pencil') {
         this.ctx.globalCompositeOperation = 'source-over';
         this.ctx.lineWidth = 2;
       } else {
@@ -106,17 +108,26 @@ class Paint {
   }
 
   handlerToogleTool(e) {
-    const tool = e.target.getAttribute('id') == 'btnDraw' ? 'draw' : 'erase';
+    let tool = 'eraser';
+    if (e.target.getAttribute('id') == 'btnDraw') {
+      tool = 'pencil';
+      this.canvas.classList.replace('eraser', 'pencil')
+    } else {
+      this.canvas.classList.replace('pencil', 'eraser')
+    }
     this.setTool(tool);
   }
 
   setTool(tool) {
-    this.canvas.classList.toggle('eraser');
     this.toolType = tool;
   }
 
   hanlderChangeColor(e) {
     this.ctx.strokeStyle = e.target.value;
+  }
+
+  handlerClearCanvas(e) {
+    this.canvas.width = this.canvas.width;
   }
 }
 
