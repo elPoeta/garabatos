@@ -5,13 +5,17 @@ class Paint {
     this.btnErase = document.querySelector('#btnErase');
     this.chooseColor = document.querySelector('#lineColor');
     this.btnClear = document.querySelector('#clearCanvas');
+    this.xPos = document.querySelector('#xPos');
+    this.yPos = document.querySelector('#yPos');
     this.ctx = this.canvas.getContext('2d');
     this.ctx.strokeStyle = "#222222";
     this.ctx.lineWith = 2;
     this.drawing = false;
     this.toolType = 'pencil';
-    this.mousePosition = { x: 0, y: 0 };
-    this.lastPosition = this.mousePosition;
+    this.position = {
+      current: { x: 0, y: 0 },
+      last: { x: 0, y: 0 }
+    };
     this.canvas.addEventListener("mousedown", this.handlerMouseDown.bind(this));
     this.canvas.addEventListener("mouseup", this.handlerMouseUp.bind(this));
     this.canvas.addEventListener("mousemove", this.handlerMouseMove.bind(this));
@@ -34,7 +38,7 @@ class Paint {
 
   handlerMouseDown(e) {
     this.drawing = true;
-    this.lastPosition = this.getMousePosition(e);
+    this.position.last = this.getCurrentMousePosition(e);
   }
 
   handlerMouseUp(e) {
@@ -42,20 +46,20 @@ class Paint {
   }
 
   handlerMouseMove(e) {
-    this.mousePosition = this.getMousePosition(e);
+    this.position.current = this.getCurrentMousePosition(e);
   }
 
-  getMousePosition(e) {
+  getCurrentMousePosition(e) {
     const clientRect = this.canvas.getBoundingClientRect();
-    return {
-      x: e.clientX - clientRect.left,
-      y: e.clientY - clientRect.top
-    };
+    const x = e.clientX - clientRect.left;
+    const y = e.clientY - clientRect.top;
+    this.setCoords({ x, y });
+    return { x, y };
   }
 
   handlerTouchStart(e) {
     e.preventDefault();
-    this.mousePosition = this.getTouchPosition(e);
+    this.position.current = this.getCurrentTouchPosition(e);
     const touch = e.touches[0];
     const mouseEvent = new MouseEvent("mousedown", {
       clientX: touch.clientX,
@@ -80,12 +84,12 @@ class Paint {
     this.canvas.dispatchEvent(mouseEvent);
   }
 
-  getTouchPosition(e) {
+  getCurrentTouchPosition(e) {
     const clientRect = this.canvas.getBoundingClientRect();
-    return {
-      x: e.touches[0].clientX - clientRect.left,
-      y: e.touches[0].clientY - clientRect.top
-    };
+    const x = e.touches[0].clientX - clientRect.left;
+    const y = e.touches[0].clientY - clientRect.top;
+    this.setCoords({ x, y });
+    return { x, y };
   }
 
   draw() {
@@ -98,13 +102,12 @@ class Paint {
         this.ctx.globalCompositeOperation = 'destination-out';
         this.ctx.lineWidth = 5;
       }
-
-      this.ctx.moveTo(this.lastPosition.x, this.lastPosition.y);
-      this.ctx.lineTo(this.mousePosition.x, this.mousePosition.y);
+      this.ctx.moveTo(this.position.last.x, this.position.last.y);
+      this.ctx.lineTo(this.position.current.x, this.position.current.y);
       this.ctx.lineJoin = this.ctx.lineCap = 'round';
       this.ctx.stroke();
     }
-    this.lastPosition = this.mousePosition;
+    this.position.last = this.position.current;
   }
 
   handlerToogleTool(e) {
@@ -130,6 +133,11 @@ class Paint {
     this.canvas.width = this.canvas.width;
     this.chooseColor.value = '#000000';
 
+  }
+
+  setCoords(pos) {
+    this.xPos.innerHTML = Math.round(pos.x);
+    this.yPos.innerHTML = Math.round(pos.y);
   }
 }
 
