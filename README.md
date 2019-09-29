@@ -1,4 +1,4 @@
-# paint-mini
+# Garabatos
 Mini Paint Canvas 
 
 Mobile Compatible
