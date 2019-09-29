@@ -3,6 +3,7 @@ class Paint {
     this.canvas = document.querySelector(`#${id}`);
     this.btnDraw = document.querySelector('#btnDraw');
     this.btnErase = document.querySelector('#btnErase');
+    this.chooseColor = document.querySelector('#lineColor');
     this.ctx = this.canvas.getContext('2d');
     this.ctx.strokeStyle = "#222222";
     this.ctx.lineWith = 2;
@@ -20,6 +21,7 @@ class Paint {
     this.canvas.addEventListener("touchmove", this.draw.bind(this));
     this.btnDraw.addEventListener('click', this.handlerToogleTool.bind(this));
     this.btnErase.addEventListener('click', this.handlerToogleTool.bind(this));
+    this.chooseColor.addEventListener('change', this.hanlderChangeColor.bind(this));
   }
 
   init(width, height) {
@@ -111,6 +113,10 @@ class Paint {
   setTool(tool) {
     this.canvas.classList.toggle('eraser');
     this.toolType = tool;
+  }
+
+  hanlderChangeColor(e) {
+    this.ctx.strokeStyle = e.target.value;
   }
 }
 
