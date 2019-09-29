@@ -7,4 +7,4 @@ base on ES6 class
 
 ### Demo beta test
 
-https://elpoeta.github.io/paint-mini
+https://elpoeta.github.io/garabatos
