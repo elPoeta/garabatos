@@ -11,7 +11,6 @@ class Paint {
     this.yPos = document.querySelector('#yPos');
     this.ctx = this.canvas.getContext('2d');
     this.ctx.strokeStyle = "#000000";
-    this.ctx.lineWith = 2;
     this.drawing = false;
     this.toolType = 'pencil';
     this.position = {
@@ -141,6 +140,8 @@ class Paint {
   handlerClearCanvas(e) {
     this.canvas.width = this.canvas.width;
     this.chooseColor.value = '#000000';
+    this.lineWidth.value = 1;
+    this.lineCap.value = 'butt';
 
   }
 
