@@ -3,12 +3,13 @@ class Paint {
     this.canvas = document.querySelector(`#${id}`);
     this.btnDraw = document.querySelector('#btnDraw');
     this.btnErase = document.querySelector('#btnErase');
+    this.lineWidth = document.querySelector('#lineWidth');
     this.chooseColor = document.querySelector('#lineColor');
     this.btnClear = document.querySelector('#clearCanvas');
     this.xPos = document.querySelector('#xPos');
     this.yPos = document.querySelector('#yPos');
     this.ctx = this.canvas.getContext('2d');
-    this.ctx.strokeStyle = "#222222";
+    this.ctx.strokeStyle = "#000000";
     this.ctx.lineWith = 2;
     this.drawing = false;
     this.toolType = 'pencil';
@@ -27,6 +28,7 @@ class Paint {
     this.btnDraw.addEventListener('click', this.handlerToogleTool.bind(this));
     this.btnErase.addEventListener('click', this.handlerToogleTool.bind(this));
     this.chooseColor.addEventListener('change', this.hanlderChangeColor.bind(this));
+    this.lineWidth.addEventListener('change', this.handlerLineWidth.bind(this));
     this.btnClear.addEventListener('click', this.handlerClearCanvas.bind(this));
   }
 
@@ -95,19 +97,20 @@ class Paint {
   draw() {
     if (this.drawing) {
       this.ctx.beginPath();
-      if (this.toolType === 'pencil') {
-        this.ctx.globalCompositeOperation = 'source-over';
-        this.ctx.lineWidth = 2;
-      } else {
+      this.toolType === 'pencil' ?
+        this.ctx.globalCompositeOperation = 'source-over' :
         this.ctx.globalCompositeOperation = 'destination-out';
-        this.ctx.lineWidth = 5;
-      }
+
       this.ctx.moveTo(this.position.last.x, this.position.last.y);
       this.ctx.lineTo(this.position.current.x, this.position.current.y);
       this.ctx.lineJoin = this.ctx.lineCap = 'round';
       this.ctx.stroke();
     }
     this.position.last = this.position.current;
+  }
+
+  handlerLineWidth(e) {
+    this.ctx.lineWidth = e.target.value;
   }
 
   handlerToogleTool(e) {
