@@ -128,6 +128,8 @@ class Paint {
 
   handlerClearCanvas(e) {
     this.canvas.width = this.canvas.width;
+    this.chooseColor.value = '#000000';
+
   }
 }
 
