@@ -152,3 +152,4 @@ class Paint {
 }
 
 new Paint('canvas').init(window.innerWidth - 20, window.innerHeight - 350);
+ToolBar.toolBarDragAndDrop();

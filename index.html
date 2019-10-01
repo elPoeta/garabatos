@@ -6,40 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./css/styles.css">
+  <script src="./javascript/toolbar.js" defer></script>
   <script src="./javascript/paint.js" defer></script>
   <title>Garabatos</title>
 </head>
 
 <body>
+  <div id="toolbarContainer">
+    <div id="toolbar">
+      <div class="item">
+        <button id="btnDraw">Draw</button>
+        <button id="btnErase">Erase</button>
+        <select name="lineWidth" id="lineWidth">
+          <option value="0" disabled>Line width</option>
+          <option value="1" selected>1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>1</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+        </select>
+        <input type="color" name="lineColor" id="lineColor">
+        <select name="lineCap" id="lineCap">
+          <option value="0" disabled>Line cap</option>
+          <option value="butt" selected>butt</option>
+          <option value="round">round</option>
+          <option value="square">square</option>
+        </select>
+        <button id="clearCanvas">Clear</button>
+      </div>
+    </div>
+  </div>
   <h1>Garabatos</h1>
   <div class="container">
     <canvas id="canvas" class="pencil"></canvas>
-    <div class="btn-container">
-      <button id="btnDraw">Draw</button>
-      <button id="btnErase">Erase</button>
-      <select name="lineWidth" id="lineWidth">
-        <option value="0" disabled>Line width</option>
-        <option value="1" selected>1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>1</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-      </select>
-      <input type="color" name="lineColor" id="lineColor">
-      <select name="lineCap" id="lineCap">
-        <option value="0" disabled>Line cap</option>
-        <option value="butt" selected>butt</option>
-        <option value="round">round</option>
-        <option value="square">square</option>
-      </select>
-      <button id="clearCanvas">Clear</button>
-    </div>
     <div class="position">
       <p>X: <span id="xPos">0</span></p>
       <p>Y: <span id="yPos">0</span></p>
