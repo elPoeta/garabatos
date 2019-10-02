@@ -30,8 +30,8 @@ h1{
 	position: absolute;
 	top: 5px;
 	right: 5px;
-	width: 50%;
-	height: 35px;
+	width: 220px;
+	height: 110px;
 	border: 2px solid #444;
 	border-radius: .3em;
 	background: rgba(255, 243, 174, 1);
@@ -41,8 +41,9 @@ h1{
 }
 .item {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  column-gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+	column-gap: 10px;
+	row-gap: 10px;
   justify-content: center;
 	align-items: center;
 	color: #000;
@@ -55,16 +56,4 @@ h1{
 
 .eraser {
   cursor: url('../img/eraser.ico'), cell;
-}
-
-@media screen and (max-width: 500px) {
-	#toolbar {
-    width: 90%;
-    height: 70px;
-
-	}
-	.item {
-		grid-template-columns: repeat(3, 1fr);
-		row-gap: 10px;
-	}
 }
