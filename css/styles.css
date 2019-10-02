@@ -57,3 +57,8 @@ h1{
 .eraser {
   cursor: url('../img/eraser.ico'), cell;
 }
+
+.legend{
+	text-align: center;
+	font-size: .6em;
+}
