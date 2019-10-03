@@ -57,7 +57,7 @@ class ToolBar {
       if (yPos <= -6 || yPos >= (window.innerHeight - 120)) {
         return;
       }
-      if (xPos >= 5 || xPos <= -(window.innerWidth - 230)) {
+      if (xPos >= 5 || xPos <= -(window.innerWidth - 150)) {
         return;
       }
 
