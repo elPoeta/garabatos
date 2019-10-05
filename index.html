@@ -19,6 +19,8 @@
       <div class="item">
         <i id="btnDraw" class="fas fa-paint-brush"></i>
         <i id="btnErase" class="fas fa-eraser"></i>
+        <i id="clearCanvas" class="fas fa-broom"></i>
+        <i id="save" class="fas fa-save"></i>
         <select name="lineWidth" id="lineWidth">
           <option value="0" disabled>Line width</option>
           <option value="1" selected>1</option>
@@ -40,18 +42,21 @@
           <option value="square">square</option>
         </select>
         <input type="color" name="lineColor" id="lineColor">
-        <i id="clearCanvas" class="fas fa-broom"></i>
       </div>
     </div>
   </div>
   <h1>Garabatos</h1>
   <div class="container">
-    <canvas id="canvas" class="pencil"></canvas>
-    <p class="legend">*Dragable toolbar</p>
     <div class="position">
       <p>X: <span id="xPos">0</span></p>
       <p>Y: <span id="yPos">0</span></p>
     </div>
+    <canvas id="canvas" class="pencil">This browser is not compatible with canvas</canvas>
+    <p class="legend">*Dragable toolbar</p>
+    <figure>
+      <img id="savedImage" class="savedImg hide" src="" alt="canvas image">
+    </figure>
+
   </div>
 </body>
 

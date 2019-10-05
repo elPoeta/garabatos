@@ -7,6 +7,8 @@ class Paint {
     this.lineCap = document.querySelector('#lineCap');
     this.chooseColor = document.querySelector('#lineColor');
     this.btnClear = document.querySelector('#clearCanvas');
+    this.btnSave = document.querySelector('#save');
+    this.savedImage = document.querySelector('#savedImage');
     this.xPos = document.querySelector('#xPos');
     this.yPos = document.querySelector('#yPos');
     this.ctx = this.canvas.getContext('2d');
@@ -31,6 +33,7 @@ class Paint {
     this.lineWidth.addEventListener('change', this.handlerLineWidth.bind(this));
     this.lineCap.addEventListener('change', this.handlerLineCap.bind(this));
     this.btnClear.addEventListener('click', this.handlerClearCanvas.bind(this));
+    this.btnSave.addEventListener('click', this.handlerSaveCanvas.bind(this));
   }
 
   init(width, height) {
@@ -148,6 +151,12 @@ class Paint {
   setCoords(pos) {
     this.xPos.innerHTML = Math.round(pos.x);
     this.yPos.innerHTML = Math.round(pos.y);
+  }
+
+  handlerSaveCanvas() {
+    const dataURL = this.canvas.toDataURL();
+    this.savedImage.src = dataURL;
+    this.savedImage.classList.toggle('hide');
   }
 }
 
