@@ -89,12 +89,13 @@ select {
 	margin: 0 auto;
 }
 figure {
-	width: 290px;
+	width: 95%;
 	height: 290px;
 	padding: 2px;
 	border: 2px dashed #ccc ;
 	border-radius: .3em;
 	text-align: center;
+	margin: 0 auto;
 }
 .hide{
 	display: none;
